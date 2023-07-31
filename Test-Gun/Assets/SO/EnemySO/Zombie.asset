@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a28ae1bcc97b4d40a80a5261290d38d, type: 3}
+  m_Name: Zombie
+  m_EditorClassIdentifier: 
+  name: Regular Zombie
+  prefab: {fileID: 1829216345007929697, guid: aef67b95f3511714397b152086808383, type: 3}
+  maxHealth: 100
+  bodyPartMaxHealth: 50
+  speed: 2
+  damage: 10
+  type: normal
