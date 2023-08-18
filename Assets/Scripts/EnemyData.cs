@@ -13,8 +13,10 @@ public class EnemyData : ScriptableObject {
     [Header("STATS")]
     public float maxHealth;
     public float bodyPartMaxHealth;
-    public float speed;
+    public float walkSpeed;
+    public float runSpeed;
     public float damage;
+    public float attackRange;
 
     [Header("TYPE")]
     public string type;

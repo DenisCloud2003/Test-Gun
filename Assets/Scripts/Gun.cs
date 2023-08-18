@@ -52,14 +52,17 @@ public class Gun : MonoBehaviour {
         if (gunData.currentAmmo > 0) {
             if (CanShoot()) {
                 if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, gunData.maxDistance)) {
-                    IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
 
+                    IDamageable damageable = hitInfo.collider.transform.GetComponent<IDamageable>();
+                    
                     EnemyBodyParts enemyBodyParts = hitInfo.collider.gameObject.GetComponent<EnemyBodyParts>();
                     if (enemyBodyParts != null) {
                         EnemyBodyParts.ColliderBodyType bodyPart = enemyBodyParts.type;
 
+                        Debug.Log(damageable);
+
                         switch (bodyPart) {
-                            case EnemyBodyParts.ColliderBodyType.body: 
+                            case EnemyBodyParts.ColliderBodyType.body:
                                 damageable?.Damage(gunData.damage, true); 
                                 break;
                             case EnemyBodyParts.ColliderBodyType.head: 

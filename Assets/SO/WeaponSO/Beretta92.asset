@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Beretta 92FS
   icon: {fileID: 0}
   damage: 18
-  maxDistance: 100
+  maxDistance: 200
   currentAmmo: 17
   maxSize: 17
   fireRate: 300

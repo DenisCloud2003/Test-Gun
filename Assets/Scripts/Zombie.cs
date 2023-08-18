@@ -5,8 +5,10 @@ using UnityEngine;
 public class Zombie : MonoBehaviour {
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private Animator anim;
-    [SerializeField] private float gravity;
-    
+    [SerializeField] private float delayTime = 1f;
+
+    private const string DEAD = "Dead";
+
     public float currentHealth;
     public float currentBodyPartHealth;
 
@@ -26,14 +28,14 @@ public class Zombie : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        moveDir.y -= gravity * Time.deltaTime;
+    public void Dead() {
+        if (currentHealth <= 0) StartCoroutine(StartDeadAnimation());
+        else Debug.Log(gameObject.name + ": " + currentHealth);
     }
 
-    public void Dead() {
-        if(currentHealth<=0) {
-            anim.SetTrigger("Dead");
-        } else Debug.Log(gameObject.name + ": " + currentHealth);
+    private IEnumerator StartDeadAnimation() {
+        anim.SetTrigger(DEAD);
+        yield return new WaitForSeconds(delayTime);
+        gameObject.SetActive(false);
     }
 }

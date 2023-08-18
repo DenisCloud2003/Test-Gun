@@ -9,13 +9,20 @@ namespace EvolveGames {
         [SerializeField] public Animator ani;
         //[SerializeField] Image ItemCanvasLogo;
         [SerializeField] bool LoopItems = true;
-        [SerializeField, Tooltip("You can add your new item here.")] GameObject[] Items;
+        [SerializeField, Tooltip("You can add your new item here.")] public List<GameObject> Items;
         //[SerializeField, Tooltip("These logos must have the same order as the items.")] Sprite[] ItemLogos;
         [SerializeField] int ItemIdInt;
         int MaxItems;
         int ChangeItemInt;
         [HideInInspector] public bool DefiniteHide;
         //bool ItemChangeLogo;
+
+        public static ItemChange Instance { get; set; }
+
+        private void Awake() {
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
 
         private void Start() {
             if (ani == null && GetComponent<Animator>()) ani = GetComponent<Animator>();
@@ -26,7 +33,7 @@ namespace EvolveGames {
             DefiniteHide = false;
             ChangeItemInt = ItemIdInt;
             //ItemCanvasLogo.sprite = ItemLogos[ItemIdInt];
-            MaxItems = Items.Length - 1;
+            MaxItems = Items.Count - 1;
             StartCoroutine(ItemChangeObject());
         }
         private void Update() {
@@ -62,15 +69,20 @@ namespace EvolveGames {
         }
 
         IEnumerator ItemChangeObject() {
-            if(!DefiniteHide) ani.SetBool("Hide", true);
-            yield return new WaitForSeconds(0.3f);
-            for (int i = 0; i < (MaxItems + 1); i++) {
-                Items[i].SetActive(false);
-            }
-            Items[ItemIdInt].SetActive(true);
-            //if (!ItemChangeLogo) StartCoroutine(ItemLogoChange());
+            if (Items == null) {
+                PlayerPickUp playerPickUp = Items[ItemIdInt].GetComponent<PlayerPickUp>();
+                if (!DefiniteHide) ani.SetBool("Hide", true);
+                yield return new WaitForSeconds(0.3f);
+                for (int i = 0; i < (MaxItems + 1); i++) {
+                    Items[i].GetComponent<PlayerPickUp>().enabled = false;
+                    Items[i].SetActive(false);
+                }
+                Items[ItemIdInt].SetActive(true);
+                playerPickUp.enabled = true;
+                //if (!ItemChangeLogo) StartCoroutine(ItemLogoChange());
 
-            if (!DefiniteHide) ani.SetBool("Hide", false);
+                if (!DefiniteHide) ani.SetBool("Hide", false);
+            }
         }
 
         /*IEnumerator ItemLogoChange()

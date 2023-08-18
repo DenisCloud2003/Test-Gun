@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Zombie
   m_EditorClassIdentifier: 
   name: Regular Zombie
-  prefab: {fileID: 1829216345007929697, guid: aef67b95f3511714397b152086808383, type: 3}
+  prefab: {fileID: 0}
   maxHealth: 100
   bodyPartMaxHealth: 50
-  speed: 2
+  walkSpeed: 0.25
+  runSpeed: 0.3
   damage: 10
+  attackRange: 0.1
   type: normal
